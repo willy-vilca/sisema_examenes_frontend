@@ -6,13 +6,18 @@ function TinyEditor({
 
     onChange,
 
-    height = 300
+    height = 350
 
 }) {
 
     return (
 
         <Editor
+
+            apiKey={
+                import.meta.env
+                    .VITE_TINYMCE_API_KEY
+            }
 
             value={value}
 
@@ -26,17 +31,31 @@ function TinyEditor({
 
                 branding: false,
 
+                resize: true,
+
                 plugins: [
 
-                    "lists",
+                    "anchor",
 
-                    "link",
+                    "autolink",
+
+                    "charmap",
+
+                    "code",
 
                     "image",
 
+                    "link",
+
+                    "lists",
+
+                    "searchreplace",
+
                     "table",
 
-                    "code",
+                    "visualblocks",
+
+                    "wordcount",
 
                     "paste"
 
@@ -46,15 +65,24 @@ function TinyEditor({
 
                     "undo redo | " +
 
+                    "blocks fontsize | " +
+
                     "bold italic underline | " +
 
-                    "alignleft aligncenter alignright | " +
+                    "alignleft aligncenter alignright alignjustify | " +
 
-                    "bullist numlist | " +
+                    "bullist numlist outdent indent | " +
 
-                    "table image link | " +
+                    "link image table | " +
 
-                    "code"
+                    "searchreplace visualblocks code",
+
+                content_style: `
+                    body {
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 14px;
+                    }
+                `
 
             }}
 
