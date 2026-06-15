@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import TinyEditor from "../editor/TinyEditor";
 
 import PrimaryButton from "../ui/PrimaryButton";
 import SecondaryButton from "../ui/SecondaryButton";
@@ -45,6 +46,10 @@ function PreguntaForm({
         setAlternativas] =
         useState(
             preguntaInicial?.alternativas || [
+                {
+                    contenidoHtml: "",
+                    esCorrecta: false
+                },
                 {
                     contenidoHtml: "",
                     esCorrecta: false
@@ -287,22 +292,12 @@ function PreguntaForm({
                     Pregunta
                 </label>
 
-                <textarea
+                <TinyEditor
                     value={contenidoHtml}
-                    onChange={(e) =>
-                        setContenidoHtml(
-                            e.target.value
-                        )
+                    onChange={
+                        setContenidoHtml
                     }
-                    rows="4"
-                    className="
-                        w-full
-                        border
-                        rounded-lg
-                        px-3
-                        py-2
-                    "
-                    required
+                    height={300}
                 />
 
             </div>
@@ -347,26 +342,22 @@ function PreguntaForm({
                                     }
                                 />
 
-                                <input
-                                    type="text"
+                                <TinyEditor
+
                                     value={
                                         alternativa.contenidoHtml
                                     }
-                                    onChange={(e) =>
+
+                                    onChange={(valor) =>
                                         cambiarAlternativa(
                                             index,
                                             "contenidoHtml",
-                                            e.target.value
+                                            valor
                                         )
                                     }
-                                    className="
-                                        flex-1
-                                        border
-                                        rounded-lg
-                                        px-3
-                                        py-2
-                                    "
-                                    placeholder={`Alternativa ${index + 1}`}
+
+                                    height={180}
+
                                 />
 
                             </div>

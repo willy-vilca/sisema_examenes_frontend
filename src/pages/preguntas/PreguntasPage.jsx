@@ -6,6 +6,14 @@ import {
     FaPowerOff
 } from "react-icons/fa";
 
+import {
+    FaEye
+}
+from "react-icons/fa";
+
+import Modal from "../../components/ui/Modal";
+import PreguntaPreview from "../../components/preguntas/PreguntaPreview";
+
 import PageHeader from "../../components/ui/PageHeader";
 import PrimaryButton from "../../components/ui/PrimaryButton";
 import DataTableContainer from "../../components/ui/DataTableContainer";
@@ -38,6 +46,14 @@ const PreguntasPage = () => {
     const [preguntaEditando,
         setPreguntaEditando] =
         useState(null);
+
+    const [preguntaPreview,
+    setPreguntaPreview] =
+    useState(null);
+
+    const [mostrarPreview,
+        setMostrarPreview] =
+        useState(false);
 
     useEffect(() => {
 
@@ -91,6 +107,17 @@ const PreguntasPage = () => {
         );
 
         setMostrarFormulario(true);
+
+    };
+
+    const verPregunta =
+    (pregunta) => {
+
+        setPreguntaPreview(
+            pregunta
+        );
+
+        setMostrarPreview(true);
 
     };
 
@@ -396,6 +423,16 @@ const PreguntasPage = () => {
                                                     justify-center
                                                     "
                                                 >
+                                                    <ActionButton
+                                                        label="Ver"
+                                                        icon={<FaEye />}
+                                                        color="green"
+                                                        onClick={() =>
+                                                            verPregunta(
+                                                                pregunta
+                                                            )
+                                                        }
+                                                    />
 
                                                     <ActionButton
                                                         label="Editar"
@@ -448,6 +485,28 @@ const PreguntasPage = () => {
                     )}
                 </DataTableContainer>
             </div>
+
+            <Modal
+
+                isOpen={
+                    mostrarPreview
+                }
+
+                title="Vista Completa de la Pregunta"
+
+                onClose={() =>
+                    setMostrarPreview(false)
+                }
+
+            >
+
+                <PreguntaPreview
+                    pregunta={
+                        preguntaPreview
+                    }
+                />
+
+            </Modal>
         </>
     );
 }
