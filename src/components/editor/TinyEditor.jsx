@@ -1,4 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
+import axios from "axios";
 
 function TinyEditor({
 
@@ -9,6 +10,37 @@ function TinyEditor({
     height = 350
 
 }) {
+
+    const subirImagen =
+        async (blobInfo) => {
+
+            const formData =
+                new FormData();
+
+            formData.append(
+                "file",
+                blobInfo.blob(),
+                blobInfo.filename()
+            );
+
+            const response =
+                await axios.post(
+
+                    "http://localhost:8080/api/uploads",
+
+                    formData,
+
+                    {
+                        headers: {
+                            "Content-Type":
+                                "multipart/form-data"
+                        }
+                    }
+
+                );
+
+            return response.data.location;
+        };
 
     return (
 
@@ -32,6 +64,19 @@ function TinyEditor({
                 branding: false,
 
                 resize: true,
+
+                automatic_uploads: true,
+
+                images_upload_handler:
+                    async (
+                        blobInfo
+                    ) => {
+
+                        return await subirImagen(
+                            blobInfo
+                        );
+
+                    },
 
                 plugins: [
 
