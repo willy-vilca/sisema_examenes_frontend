@@ -280,6 +280,46 @@ function PreguntaForm({
 
             </div>
 
+            <div
+                className="
+                    bg-blue-50
+                    border
+                    border-blue-200
+                    rounded-lg
+                    p-4
+                    mb-4
+                    text-sm
+                "
+            >
+
+                <strong>
+                    Fórmulas matemáticas:
+                </strong>
+
+                <br />
+
+                Escriba expresiones usando:
+
+                <br />
+
+                <code>
+                    {"\\(x^2 + y^2 = z^2\\)"}
+                </code>
+
+                <br />
+
+                <code>
+                    {"\\(\\frac{a}{b}\\)"}
+                </code>
+
+                <br />
+
+                <code>
+                    {"\\(\\sqrt{x}\\)"}
+                </code>
+
+            </div>
+
             <div>
 
                 <label

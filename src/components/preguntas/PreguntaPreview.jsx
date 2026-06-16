@@ -1,4 +1,5 @@
 import Badge from "../ui/Badge";
+import MathContent from "../math/MathContent";
 
 function PreguntaPreview({
 
@@ -27,20 +28,10 @@ function PreguntaPreview({
                     Enunciado
                 </h3>
 
-                <div
-
-                    className="
-                        border
-                        rounded-lg
-                        p-4
-                        bg-gray-50
-                    "
-
-                    dangerouslySetInnerHTML={{
-                        __html:
-                            pregunta.contenidoHtml
-                    }}
-
+                <MathContent
+                    html={
+                        pregunta.contenidoHtml
+                    }
                 />
 
             </div>
@@ -104,13 +95,10 @@ function PreguntaPreview({
 
                                     </div>
 
-                                    <div
-
-                                        dangerouslySetInnerHTML={{
-                                            __html:
-                                                alternativa.contenidoHtml
-                                        }}
-
+                                    <MathContent
+                                        html={
+                                            alternativa.contenidoHtml
+                                        }
                                     />
 
                                 </div>
