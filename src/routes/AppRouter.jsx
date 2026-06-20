@@ -11,6 +11,7 @@ import CategoriasPage from "../pages/categorias/CategoriasPage";
 import ProcesosPage from "../pages/procesos/ProcesosPage";
 import PreguntasPage from "../pages/preguntas/PreguntasPage";
 import ExamenesPage from "../pages/examenes/ExamenesPage";
+import ExamenDetallePage from "../pages/examenes/ExamenDetallePage";
 
 function AppRouter() {
 
@@ -48,6 +49,11 @@ function AppRouter() {
                     <Route
                         path="examenes"
                         element={<ExamenesPage />}
+                    />
+
+                    <Route
+                        path="examenes/:id"
+                        element={<ExamenDetallePage />}
                     />
 
                 </Route>
