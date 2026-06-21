@@ -107,11 +107,37 @@ function ExamenesTable({
                                 </td>
 
                                 <td className="p-4">
-                                    {examen.procesoNombre}
+                                    <span
+                                        className="
+                                            inline-flex
+                                            items-center
+                                            px-3
+                                            py-1
+                                            rounded-full
+                                            bg-slate-200
+                                            text-slate-700
+                                            text-sm
+                                            font-medium
+                                        "
+                                    >
+                                        {examen.procesoNombre}
+                                    </span>
                                 </td>
 
                                 <td className="p-4">
-                                    {examen.usuarioNombre}
+                                    <span
+                                        className="
+                                            inline-flex
+                                            px-3
+                                            py-1
+                                            rounded-full
+                                            bg-blue-100
+                                            text-blue-700
+                                            text-sm
+                                        "
+                                    >
+                                        {examen.usuarioNombre}
+                                    </span>
                                 </td>
 
                                 <td className="p-4">

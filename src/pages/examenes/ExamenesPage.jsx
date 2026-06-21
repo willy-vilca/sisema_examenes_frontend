@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import ExamenForm from "../../components/examenes/ExamenForm";
 import ModalConfiguracionExamen from "../../components/examenes/ModalConfiguracionExamen";
 import ExamenesTable from "../../components/examenes/ExamenesTable";
+import ExamenesStats from "../../components/examenes/ExamenesStats";
 
 import examenService from "../../services/examenService";
 
@@ -120,6 +121,10 @@ function ExamenesPage() {
                 </p>
 
             </div>
+
+            <ExamenesStats
+                examenes={examenes}
+            />
 
             <ExamenForm
                 onProcesar={

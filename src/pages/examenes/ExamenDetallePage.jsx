@@ -69,16 +69,28 @@ function ExamenDetallePage() {
                 "
             >
 
-                <h1
-                    className="
-                        text-2xl
-                        font-bold
-                        text-slate-800
-                        mb-6
-                    "
-                >
-                    Detalle del Examen
-                </h1>
+                <div className="mb-6">
+
+                    <h1
+                        className="
+                            text-3xl
+                            font-bold
+                            text-slate-800
+                        "
+                    >
+                        {detalle.nombre}
+                    </h1>
+
+                    <p
+                        className="
+                            text-slate-500
+                            mt-1
+                        "
+                    >
+                        Información completa del examen generado.
+                    </p>
+
+                </div>
 
                 <div
                     className="
@@ -319,13 +331,27 @@ function ExamenDetallePage() {
                                         "
                                     >
 
-                                        <span
-                                            className="
-                                                font-medium
-                                            "
-                                        >
-                                            Tema {tema.codigoTema}
-                                        </span>
+                                        <div>
+                                            <p
+                                                className="
+                                                    text-xs
+                                                    uppercase
+                                                    tracking-wide
+                                                    text-slate-500
+                                                "
+                                            >
+                                                Tema
+                                            </p>
+
+                                            <p
+                                                className="
+                                                    text-lg
+                                                    font-semibold
+                                                "
+                                            >
+                                                {tema.codigoTema}
+                                            </p>
+                                        </div>
 
                                         <button
                                             onClick={() =>
