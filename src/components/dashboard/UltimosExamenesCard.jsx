@@ -9,12 +9,12 @@ function UltimosExamenesCard({
                 bg-white
                 rounded-xl
                 border
-                border-slate-200
-                shadow-sm
+                border-slate-300
+                shadow-lg
             "
         >
 
-            <div className="p-5 border-b">
+            <div className="p-5 border-b border-slate-300">
 
                 <h2
                     className="
@@ -30,6 +30,19 @@ function UltimosExamenesCard({
             <div className="p-5">
 
                 <div className="space-y-4">
+                    {
+                        examenes.length === 0 && (
+                            <div
+                                className="
+                                    text-center
+                                    py-8
+                                    text-slate-500
+                                "
+                            >
+                                No existen registros disponibles.
+                            </div>
+                        )
+                    }
 
                     {
                         examenes.map((examen) => (
@@ -38,6 +51,7 @@ function UltimosExamenesCard({
                                 key={examen.id}
                                 className="
                                     border-b
+                                    border-slate-300
                                     pb-3
                                 "
                             >
@@ -58,6 +72,20 @@ function UltimosExamenesCard({
                                     "
                                 >
                                     {examen.procesoNombre}
+                                </p>
+
+                                <p
+                                    className="
+                                        text-xs
+                                        text-slate-400
+                                        mt-1
+                                    "
+                                >
+                                    {
+                                        new Date(
+                                            examen.fechaGeneracion
+                                        ).toLocaleDateString()
+                                    }
                                 </p>
 
                             </div>

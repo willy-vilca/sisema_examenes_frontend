@@ -51,10 +51,13 @@ function DashboardStats({
                         key={card.titulo}
                         className="
                             bg-white
-                            rounded-xl
+                            rounded-2xl
                             border
-                            border-slate-200
-                            shadow-sm
+                            border-slate-300
+                            shadow-med
+                            hover:shadow-xl
+                            transition-all
+                            duration-300
                             p-6
                         "
                     >
@@ -80,9 +83,10 @@ function DashboardStats({
 
                                 <h3
                                     className="
-                                        text-3xl
+                                        text-4xl
                                         font-bold
                                         mt-2
+                                        text-slate-800
                                     "
                                 >
                                     {card.valor}

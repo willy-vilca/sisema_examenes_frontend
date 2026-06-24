@@ -9,12 +9,12 @@ function PreguntasPorCategoriaCard({
                 bg-white
                 rounded-xl
                 border
-                border-slate-200
-                shadow-sm
+                border-slate-300
+                shadow-lg
             "
         >
 
-            <div className="p-5 border-b">
+            <div className="p-5 border-b border-slate-300">
 
                 <h2
                     className="
@@ -27,9 +27,28 @@ function PreguntasPorCategoriaCard({
 
             </div>
 
-            <div className="p-5">
+            <div
+                className="
+                    p-5
+                    max-h-[420px]
+                    overflow-y-auto
+                "
+            >
 
                 <div className="space-y-4">
+                    {
+                        categorias.length === 0 && (
+                            <div
+                                className="
+                                    text-center
+                                    py-8
+                                    text-slate-500
+                                "
+                            >
+                                No existen registros disponibles.
+                            </div>
+                        )
+                    }
 
                     {
                         categorias.map((item) => (
@@ -51,7 +70,7 @@ function PreguntasPorCategoriaCard({
                                     className="
                                         px-3 py-1
                                         rounded-full
-                                        bg-slate-100
+                                        bg-slate-300
                                         text-slate-700
                                         text-sm
                                     "

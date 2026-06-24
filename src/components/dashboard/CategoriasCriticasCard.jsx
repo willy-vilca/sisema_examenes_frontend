@@ -11,8 +11,8 @@ function CategoriasCriticasCard({
                 bg-white
                 rounded-xl
                 border
-                border-slate-200
-                shadow-sm
+                border-slate-300
+                shadow-lg
             "
         >
 
@@ -20,6 +20,7 @@ function CategoriasCriticasCard({
                 className="
                     p-5
                     border-b
+                    border-slate-300
                     flex
                     items-center
                     gap-2
@@ -47,6 +48,20 @@ function CategoriasCriticasCard({
                 <div className="space-y-4">
 
                     {
+                        categorias.length === 0 && (
+                            <div
+                                className="
+                                    text-center
+                                    py-8
+                                    text-slate-500
+                                "
+                            >
+                                No existen registros disponibles.
+                            </div>
+                        )
+                    }
+
+                    {
                         categorias.map((cat) => (
 
                             <div
@@ -63,13 +78,19 @@ function CategoriasCriticasCard({
                                 </span>
 
                                 <span
-                                    className="
+                                    className={`
                                         px-3 py-1
                                         rounded-full
-                                        bg-red-50
-                                        text-red-700
                                         text-sm
-                                    "
+                                        font-medium
+                                        ${
+                                            cat.cantidadPreguntas === 0
+                                                ? "bg-red-100 text-red-700"
+                                                : cat.cantidadPreguntas <= 10
+                                                ? "bg-amber-100 text-amber-700"
+                                                : "bg-yellow-100 text-yellow-700"
+                                        }
+                                    `}
                                 >
                                     {cat.cantidadPreguntas}
                                 </span>

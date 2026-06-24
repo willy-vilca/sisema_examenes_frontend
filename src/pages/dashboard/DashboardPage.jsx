@@ -44,26 +44,99 @@ function DashboardPage() {
 
         <div className="space-y-6">
 
-            <div>
-
-                <h1
+           <div
                     className="
-                        text-3xl
-                        font-bold
-                        text-slate-800
+                        bg-gradient-to-r
+                        from-slate-800
+                        to-slate-700
+                        text-white
+                        rounded-2xl
+                        p-8
+                    "
+            >
+
+                    <h2
+                        className="
+                            text-2xl
+                            font-semibold
+                        "
+                    >
+                        Bienvenido al Sistema Generador de Exámenes
+                    </h2>
+
+                    <p
+                        className="
+                            mt-2
+                            text-slate-200
+                        "
+                    >
+                        Administre categorías, preguntas,
+                        procesos de admisión y genere exámenes
+                        oficiales en formato PDF.
+                    </p>
+
+            </div>
+            
+            <div
+                className="
+                    bg-white
+                    border
+                    border-slate-300
+                    rounded-2xl
+                    shadow-sm
+                    p-8
+                "
+            >
+
+                <div
+                    className="
+                        flex
+                        flex-col
+                        lg:flex-row
+                        lg:items-center
+                        lg:justify-between
                     "
                 >
-                    Dashboard
-                </h1>
 
-                <p
-                    className="
-                        text-slate-500
-                        mt-1
-                    "
-                >
-                    Sistema Generador de Exámenes de Admisión
-                </p>
+                    <div>
+
+                        <h1
+                            className="
+                                text-3xl
+                                font-bold
+                                text-slate-800
+                            "
+                        >
+                            Dashboard
+                        </h1>
+
+                        <p
+                            className="
+                                mt-2
+                                text-slate-500
+                            "
+                        >
+                            Panel general del Sistema Generador de Exámenes de Admisión.
+                        </p>
+
+                    </div>
+
+                    <div
+                        className="
+                            mt-4
+                            lg:mt-0
+                            px-4
+                            py-2
+                            rounded-xl
+                            bg-slate-100
+                            text-slate-700
+                            font-medium
+                        "
+                    >
+                        Gestión Académica
+                    </div>
+
+                </div>
 
             </div>
 

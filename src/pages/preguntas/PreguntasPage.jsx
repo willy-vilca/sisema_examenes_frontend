@@ -308,7 +308,7 @@ const PreguntasPage = () => {
 
             )}
 
-            <div className="mt-6">
+            <div className="mt-6 max-h-[600px] overflow-y-auto">
                 <DataTableContainer>
                     {preguntas.length === 0 ? (
 
