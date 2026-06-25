@@ -457,6 +457,7 @@ function CategoriasPage() {
                                 className="
                                     bg-gray-50
                                     border-b
+                                    border-slate-300
                                 "
                             >
 
@@ -515,7 +516,8 @@ function CategoriasPage() {
                                             key={categoria.id}
                                             className="
                                                 border-b
-                                                hover:bg-gray-50
+                                                border-slate-300
+                                                hover:bg-zinc-300
                                             "
                                         >
 
@@ -594,6 +596,7 @@ function CategoriasPage() {
                                 className="
                                     bg-gray-50
                                     border-b
+                                    border-slate-300
                                 "
                             >
 
@@ -662,7 +665,8 @@ function CategoriasPage() {
                                             key={categoria.id}
                                             className="
                                                 border-b
-                                                hover:bg-gray-50
+                                                border-slate-300
+                                                hover:bg-gray-300
                                             "
                                         >
 

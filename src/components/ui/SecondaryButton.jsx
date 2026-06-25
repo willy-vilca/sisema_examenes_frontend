@@ -8,8 +8,8 @@ function SecondaryButton({
         <button
             onClick={onClick}
             className="
-                bg-gray-200
-                hover:bg-gray-300
+                bg-gray-300
+                hover:bg-gray-400
                 text-gray-700
                 px-5
                 py-2

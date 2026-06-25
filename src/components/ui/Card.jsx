@@ -6,9 +6,9 @@ function Card({ children }) {
             className="
                 bg-white
                 rounded-xl
-                shadow-sm
+                shadow-lg
                 border
-                border-gray-200
+                border-slate-300
                 p-6
             "
         >

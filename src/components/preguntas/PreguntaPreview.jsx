@@ -60,6 +60,7 @@ function PreguntaPreview({
                                     key={alternativa.id}
                                     className="
                                         border
+                                        border-slate-300
                                         rounded-lg
                                         p-4
                                     "

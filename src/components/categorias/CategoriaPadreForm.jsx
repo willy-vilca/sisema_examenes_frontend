@@ -58,7 +58,7 @@ function CategoriaPadreForm({
                     className="
                         w-full
                         border
-                        border-gray-300
+                        border-slate-300
                         rounded-lg
                         px-3
                         py-2
@@ -91,7 +91,7 @@ function CategoriaPadreForm({
                     className="
                         w-full
                         border
-                        border-gray-300
+                        border-slate-300
                         rounded-lg
                         px-3
                         py-2

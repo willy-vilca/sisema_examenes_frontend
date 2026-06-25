@@ -5,6 +5,11 @@ import {
 } from "react-router-dom";
 
 import MainLayout from "../components/layout/MainLayout";
+import ProtectedRoute from "../components/auth/ProtectedRoute";
+import AdminRoute from "../components/auth/AdminRoute";
+import PublicRoute from "../components/auth/PublicRoute";
+import LoginPage from "../pages/auth/LoginPage";
+import UsuariosPage from "../pages/usuarios/UsuariosPage";
 
 import DashboardPage from "../pages/dashboard/DashboardPage";
 import CategoriasPage from "../pages/categorias/CategoriasPage";
@@ -22,8 +27,21 @@ function AppRouter() {
             <Routes>
 
                 <Route
+                    path="/login"
+                    element={
+                        <PublicRoute>
+                            <LoginPage />
+                        </PublicRoute>
+                    }
+                />
+
+                <Route
                     path="/"
-                    element={<MainLayout />}
+                    element={
+                        <ProtectedRoute>
+                            <MainLayout />
+                        </ProtectedRoute>
+                    }
                 >
 
                     <Route
@@ -55,6 +73,16 @@ function AppRouter() {
                         path="examenes/:id"
                         element={<ExamenDetallePage />}
                     />
+
+                    <Route
+                        path="usuarios"
+                        element={
+                            <AdminRoute>
+                                <UsuariosPage />
+                            </AdminRoute>
+                        }
+                    />
+
 
                 </Route>
 

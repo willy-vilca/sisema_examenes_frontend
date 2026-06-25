@@ -18,6 +18,7 @@ function MathContent({
                         border
                         rounded-lg
                         p-4
+                        border-slate-300
                         bg-gray-50
                     "
 

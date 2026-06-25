@@ -322,6 +322,7 @@ const PreguntasPage = () => {
                                 className="
                                     bg-gray-50
                                     border-b
+                                    border-slate-300
                                 "
                             >
 
@@ -364,7 +365,8 @@ const PreguntasPage = () => {
                                         key={pregunta.id}
                                         className="
                                         border-b
-                                        hover:bg-gray-50
+                                        border-slate-300
+                                        hover:bg-zinc-300
                                         "
                                         >
 
@@ -401,16 +403,22 @@ const PreguntasPage = () => {
 
                                                 <div
                                                     className="
-                                                    max-w-sm
-                                                    truncate
+                                                    flex
+                                                    gap-2
+                                                    justify-center
                                                     "
                                                 >
 
-                                                {
-                                                    obtenerVistaPrevia(
-                                                        pregunta.contenidoHtml
-                                                    )
-                                                }
+                                                    <ActionButton
+                                                        label="Ver"
+                                                        icon={<FaEye />}
+                                                        color="green"
+                                                        onClick={() =>
+                                                            verPregunta(
+                                                                pregunta
+                                                            )
+                                                        }
+                                                    />
                                                 </div>
                                             </td>
 
@@ -423,16 +431,6 @@ const PreguntasPage = () => {
                                                     justify-center
                                                     "
                                                 >
-                                                    <ActionButton
-                                                        label="Ver"
-                                                        icon={<FaEye />}
-                                                        color="green"
-                                                        onClick={() =>
-                                                            verPregunta(
-                                                                pregunta
-                                                            )
-                                                        }
-                                                    />
 
                                                     <ActionButton
                                                         label="Editar"

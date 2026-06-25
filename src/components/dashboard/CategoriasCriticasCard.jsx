@@ -85,10 +85,10 @@ function CategoriasCriticasCard({
                                         font-medium
                                         ${
                                             cat.cantidadPreguntas === 0
-                                                ? "bg-red-100 text-red-700"
+                                                ? "bg-red-200 text-red-800"
                                                 : cat.cantidadPreguntas <= 10
-                                                ? "bg-amber-100 text-amber-700"
-                                                : "bg-yellow-100 text-yellow-700"
+                                                ? "bg-orange-200 text-amber-700"
+                                                : "bg-yellow-200 text-yellow-900"
                                         }
                                     `}
                                 >

@@ -9,8 +9,8 @@ function DataTableContainer({
                 bg-white
                 rounded-xl
                 border
-                border-gray-200
-                shadow-sm
+                border-slate-300
+                shadow-lg
                 overflow-hidden
             "
         >

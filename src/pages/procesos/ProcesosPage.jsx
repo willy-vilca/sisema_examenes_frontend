@@ -290,6 +290,7 @@ function ProcesosPage() {
                                 className="
                                     bg-gray-50
                                     border-b
+                                    border-slate-300
                                 "
                             >
 
@@ -336,7 +337,8 @@ function ProcesosPage() {
 
                                             className="
                                                 border-b
-                                                hover:bg-gray-50
+                                                border-slate-300
+                                                hover:bg-zinc-300
                                             "
 
                                         >
@@ -354,8 +356,8 @@ function ProcesosPage() {
                                                 <span
                                                     className={
                                                         proceso.estado === "ACTIVO"
-                                                            ? "bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium"
-                                                            : "bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium"
+                                                            ? "bg-green-200 text-green-800 px-3 py-1 rounded-full text-xs font-medium"
+                                                            : "bg-red-200 text-red-800 px-3 py-1 rounded-full text-xs font-medium"
                                                     }
                                                 >
                                                     {proceso.estado}

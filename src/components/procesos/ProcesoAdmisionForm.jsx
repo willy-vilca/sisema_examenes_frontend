@@ -77,7 +77,7 @@ function ProcesoAdmisionForm({
                     onChange={(e) =>
                         setNombre(e.target.value)
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="w-full border border-slate-300 rounded-lg px-3 py-2"
                     required
                 />
 
@@ -95,7 +95,7 @@ function ProcesoAdmisionForm({
                         setDescripcion(e.target.value)
                     }
                     rows="3"
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 />
 
             </div>
@@ -116,7 +116,7 @@ function ProcesoAdmisionForm({
                                 e.target.value
                             )
                         }
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                        className="w-full border border-slate-300 rounded-lg px-3 py-2"
                     />
 
                 </div>
@@ -135,7 +135,7 @@ function ProcesoAdmisionForm({
                                 e.target.value
                             )
                         }
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                        className="w-full border border-slate-300 rounded-lg px-3 py-2"
                     />
 
                 </div>
@@ -155,7 +155,7 @@ function ProcesoAdmisionForm({
                             e.target.value
                         )
                     }
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 >
 
                     <option value="ACTIVO">
