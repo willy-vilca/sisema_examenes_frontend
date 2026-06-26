@@ -57,7 +57,7 @@ function ExamenForm({
 
     return (
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <div className="bg-white rounded-xl shadow-lg border border-slate-300 p-6">
 
             <h2 className="text-lg font-semibold text-slate-800 mb-6">
                 Crear Nuevo Examen
@@ -72,7 +72,7 @@ function ExamenForm({
                     name="procesoId"
                     value={formData.procesoId}
                     onChange={handleChange}
-                    className="border rounded-lg px-4 py-2"
+                    className="border border-slate-300 rounded-lg px-4 py-2"
                     required
                 >
 
@@ -99,7 +99,7 @@ function ExamenForm({
                     value={formData.nombre}
                     onChange={handleChange}
                     placeholder="Nombre del examen"
-                    className="border rounded-lg px-4 py-2"
+                    className="border border-slate-300 rounded-lg px-4 py-2"
                     required
                 />
 
@@ -108,7 +108,7 @@ function ExamenForm({
                     <button
                         type="button"
                         onClick={limpiarFormulario}
-                        className="px-4 py-2 rounded-lg border"
+                        className="px-4 py-2 rounded-lg transition-all border border-slate-400 text-slate-800 hover:bg-gray-300"
                     >
                         Cancelar
                     </button>
@@ -120,6 +120,7 @@ function ExamenForm({
                             rounded-lg
                             bg-slate-800
                             text-white
+                            transition-all
                             hover:bg-slate-700
                         "
                     >

@@ -34,9 +34,9 @@ function ExamenesStats({
                 className="
                     bg-white
                     rounded-xl
-                    shadow-sm
+                    shadow-lg
                     border
-                    border-slate-200
+                    border-slate-300
                     p-6
                 "
             >
@@ -85,9 +85,9 @@ function ExamenesStats({
                 className="
                     bg-white
                     rounded-xl
-                    shadow-sm
+                    shadow-lg
                     border
-                    border-slate-200
+                    border-slate-300
                     p-6
                 "
             >
@@ -136,9 +136,9 @@ function ExamenesStats({
                 className="
                     bg-white
                     rounded-xl
-                    shadow-sm
+                    shadow-lg
                     border
-                    border-slate-200
+                    border-slate-300
                     p-6
                 "
             >

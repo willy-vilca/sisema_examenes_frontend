@@ -75,7 +75,7 @@ function LoginPage() {
                     max-w-md
                     p-10
                     border
-                    border-gray-200
+                    border-gray-300
                 "
             >
 
@@ -148,6 +148,7 @@ function LoginPage() {
                                 flex
                                 items-center
                                 border
+                                border-gray-300
                                 rounded-lg
                                 px-3
                                 py-2
@@ -190,6 +191,7 @@ function LoginPage() {
                                 flex
                                 items-center
                                 border
+                                border-gray-300
                                 rounded-lg
                                 px-3
                                 py-2

@@ -62,9 +62,9 @@ function ExamenDetallePage() {
                 className="
                     bg-white
                     rounded-xl
-                    shadow-sm
+                    shadow-lg
                     border
-                    border-slate-200
+                    border-slate-300
                     p-6
                 "
             >
@@ -177,9 +177,9 @@ function ExamenDetallePage() {
                 className="
                     bg-white
                     rounded-xl
-                    shadow-sm
+                    shadow-lg
                     border
-                    border-slate-200
+                    border-slate-300
                 "
             >
 
@@ -187,6 +187,7 @@ function ExamenDetallePage() {
                     className="
                         p-5
                         border-b
+                        border-slate-300
                         flex
                         items-center
                         gap-2
@@ -238,6 +239,7 @@ function ExamenDetallePage() {
                                             }
                                             className="
                                                 border-t
+                                                border-slate-300
                                             "
                                         >
 
@@ -282,9 +284,9 @@ function ExamenDetallePage() {
                 className="
                     bg-white
                     rounded-xl
-                    shadow-sm
+                    shadow-lg
                     border
-                    border-slate-200
+                    border-slate-300
                 "
             >
 
@@ -292,6 +294,7 @@ function ExamenDetallePage() {
                     className="
                         p-5
                         border-b
+                        border-slate-300
                         flex
                         items-center
                         gap-2
@@ -326,6 +329,7 @@ function ExamenDetallePage() {
                                             justify-between
                                             items-center
                                             border
+                                            border-slate-300
                                             rounded-lg
                                             p-4
                                         "

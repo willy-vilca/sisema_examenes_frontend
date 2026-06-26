@@ -184,6 +184,7 @@ function PreguntaForm({
                         className="
                             w-full
                             border
+                            border-slate-300 
                             rounded-lg
                             px-3
                             py-2
@@ -242,6 +243,7 @@ function PreguntaForm({
                         className="
                             w-full
                             border
+                            border-slate-300
                             rounded-lg
                             px-3
                             py-2
@@ -284,7 +286,7 @@ function PreguntaForm({
                 className="
                     bg-blue-50
                     border
-                    border-blue-200
+                    border-blue-300
                     rounded-lg
                     p-4
                     mb-4

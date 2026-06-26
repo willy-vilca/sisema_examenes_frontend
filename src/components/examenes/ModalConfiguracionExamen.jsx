@@ -193,7 +193,7 @@ function ModalConfiguracionExamen({
                         className="
                             w-full
                             border
-                            border-slate-200
+                            border-slate-300
                         "
                     >
 
@@ -202,6 +202,8 @@ function ModalConfiguracionExamen({
                             <tr
                                 className="
                                     bg-slate-100
+                                    border-b
+                                    border-slate-300
                                 "
                             >
 
@@ -228,7 +230,8 @@ function ModalConfiguracionExamen({
                                 <tr
                                     key={cat.categoriaId}
                                     className="
-                                        border-t
+                                        border-b
+                                        border-slate-300
                                     "
                                 >
 
@@ -260,6 +263,7 @@ function ModalConfiguracionExamen({
                                             className="
                                                 w-24
                                                 border
+                                                border-slate-300
                                                 rounded-lg
                                                 px-2
                                                 py-1
@@ -306,6 +310,7 @@ function ModalConfiguracionExamen({
                         }
                         className="
                             border
+                            border-slate-300
                             rounded-lg
                             px-4
                             py-2
@@ -329,6 +334,9 @@ function ModalConfiguracionExamen({
                         className="
                             px-4 py-2
                             border
+                            border-slate-400
+                            transition-all
+                            hover:bg-gray-300
                             rounded-lg
                         "
                     >

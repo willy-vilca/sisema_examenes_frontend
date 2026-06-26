@@ -17,14 +17,14 @@ function ExamenesTable({
             className="
                 bg-white
                 rounded-xl
-                shadow-sm
+                shadow-lg
                 border
-                border-slate-200
+                border-slate-300
                 overflow-hidden
             "
         >
 
-            <div className="p-6 border-b">
+            <div className="p-6 border-b border-slate-300">
 
                 <h2
                     className="
@@ -48,6 +48,8 @@ function ExamenesTable({
                             className="
                                 bg-slate-100
                                 text-slate-700
+                                border-b
+                                border-slate-300
                             "
                         >
 
@@ -101,7 +103,8 @@ function ExamenesTable({
                             <tr
                                 key={examen.id}
                                 className="
-                                    border-t
+                                    border-b
+                                    border-slate-300
                                     hover:bg-slate-50
                                 "
                             >

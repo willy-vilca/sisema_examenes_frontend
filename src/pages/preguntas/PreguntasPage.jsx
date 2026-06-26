@@ -562,7 +562,7 @@ const PreguntasPage = () => {
                         <table className="w-full">
                             <thead
                                 className="
-                                    bg-gray-50
+                                    bg-neutral-200
                                     border-b
                                     border-slate-300
                                 "

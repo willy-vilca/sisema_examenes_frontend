@@ -13,9 +13,9 @@ function PageCard({
             className="
                 bg-white
                 rounded-xl
-                shadow-sm
+                shadow-lg
                 border
-                border-gray-200
+                border-slate-300
             "
 
         >
@@ -24,6 +24,7 @@ function PageCard({
 
                 className="
                     border-b
+                    border-slate-300
                     px-6
                     py-4
                 "

@@ -12,13 +12,13 @@ function Badge({
             "bg-green-200 text-green-700",
 
         danger:
-            "bg-red-100 text-red-700",
+            "bg-red-200 text-red-700",
 
         warning:
-            "bg-yellow-100 text-yellow-700",
+            "bg-yellow-200 text-yellow-700",
 
         info:
-            "bg-blue-100 text-blue-700"
+            "bg-blue-200 text-blue-700"
 
     };
 
