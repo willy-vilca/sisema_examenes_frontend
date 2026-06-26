@@ -34,7 +34,10 @@ const examenService = {
             `http://localhost:8080/api/examenes/tema/${temaId}/pdf`,
             "_blank"
         );
-    }
+    },
+
+    eliminar: (id) =>
+    api.delete(`/examenes/${id}`),
 
 };
 

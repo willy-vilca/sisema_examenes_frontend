@@ -95,6 +95,42 @@ function ExamenesPage() {
 
     };
 
+    const eliminarExamen = async (id) => {
+
+        const resultado = await Swal.fire({
+            title: "¿Eliminar examen?",
+            text: "Se eliminarán el examen, todos sus temas y los archivos PDF generados.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#dc2626"
+        });
+
+        if (!resultado.isConfirmed) {
+            return;
+        }
+
+        try {
+            await examenService.eliminar(id);
+            Swal.fire({
+                icon: "success",
+                title: "Eliminado",
+                text: "El examen fue eliminado correctamente."
+            });
+
+            cargarExamenes();
+
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "No se pudo eliminar el examen."
+
+            });
+        }
+    };
+
     return (
 
         <div className="space-y-6">
@@ -134,6 +170,7 @@ function ExamenesPage() {
 
             <ExamenesTable
                 examenes={examenes}
+                onEliminar={eliminarExamen}
             />
 
             <ModalConfiguracionExamen

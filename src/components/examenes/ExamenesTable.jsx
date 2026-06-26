@@ -1,8 +1,12 @@
-import { Eye } from "lucide-react";
+import {
+    Eye,
+    Trash2
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 function ExamenesTable({
-    examenes
+    examenes,
+    onEliminar
 }) {
 
     const navigate = useNavigate();
@@ -156,6 +160,7 @@ function ExamenesTable({
                                         className="
                                             flex
                                             justify-center
+                                            gap-2
                                         "
                                     >
 
@@ -177,11 +182,28 @@ function ExamenesTable({
                                                 hover:bg-slate-700
                                             "
                                         >
-
                                             <Eye size={16} />
-
                                             Ver Detalle
+                                        </button>
 
+                                        <button
+                                            onClick={() =>
+                                                onEliminar(examen.id)
+                                            }
+                                            className="
+                                                flex
+                                                items-center
+                                                gap-2
+                                                px-3
+                                                py-2
+                                                rounded-lg
+                                                bg-red-600
+                                                text-white
+                                                hover:bg-red-700
+                                            "
+                                        >
+                                            <Trash2 size={16} />
+                                            Eliminar
                                         </button>
 
                                     </div>

@@ -26,6 +26,9 @@ import PageCard from "../../components/ui/PageCard";
 import PreguntaForm from "../../components/preguntas/PreguntaForm";
 
 import preguntaService from "../../services/preguntaService";
+import procesoAdmisionService from "../../services/procesoAdmisionService";
+import categoriaPadreService from "../../services/categoriaPadreService";
+import categoriaService from "../../services/categoriaService";
 
 import alertService from "../../services/alertService";
 
@@ -33,8 +36,17 @@ import { confirmDialog }
 from "../../services/confirmDialog";
 
 const PreguntasPage = () => {
-    const [preguntas, setPreguntas] =
-    useState([]);
+    const [preguntas, setPreguntas] = useState([]);
+    const [procesos, setProcesos] = useState([]);
+    const [categoriasPadre, setCategoriasPadre] = useState([]);
+    const [categorias, setCategorias] = useState([]);
+
+    const [procesoFiltro, setProcesoFiltro] = useState("");
+    const [categoriaPadreFiltro, setCategoriaPadreFiltro] = useState("");
+    const [categoriaFiltro, setCategoriaFiltro] = useState("");
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [paginaInput, setPaginaInput] = useState("1");
+    const FILAS_POR_PAGINA = 6;
 
     const [loading, setLoading] =
         useState(true);
@@ -61,33 +73,43 @@ const PreguntasPage = () => {
 
     }, []);
 
-    const cargarPreguntas =
-    async () => {
-
+    const cargarPreguntas = async () => {
         try {
-
             setLoading(true);
 
-            const response =
-                await preguntaService.listar();
+            const [
+                preguntasResponse,
+                procesosResponse,
+                categoriasPadreResponse,
+                categoriasResponse
+            ] = await Promise.all([
+                preguntaService.listar(),
+                procesoAdmisionService.listar(),
+                categoriaPadreService.listar(),
+                categoriaService.listar()
+            ]);
 
             setPreguntas(
-                response.data
+                preguntasResponse.data
+            );
+            setProcesos(
+                procesosResponse.data
+            );
+            setCategoriasPadre(
+                categoriasPadreResponse.data
+            );
+            setCategorias(
+                categoriasResponse.data
             );
 
         } catch (error) {
-
             alertService.error(
                 "Error",
-                "No se pudieron cargar las preguntas"
+                "No se pudieron cargar los datos."
             );
-
         } finally {
-
             setLoading(false);
-
         }
-
     };
 
     const abrirNuevaPregunta =
@@ -249,6 +271,64 @@ const PreguntasPage = () => {
             : texto;
     };
 
+    // Filtrado y Paginación de Preguntas
+    const categoriasVisibles = categorias.filter((categoria) => {
+        if (categoriaPadreFiltro === "") {
+            return true;
+        }
+        return categoria.categoriaPadreId === Number(categoriaPadreFiltro);
+    });
+
+    const preguntasFiltradas = preguntas.filter((pregunta) => {
+        const coincideProceso =
+            procesoFiltro === "" ||
+            pregunta.procesoId === Number(procesoFiltro);
+
+        const coincideCategoriaPadre =
+            categoriaPadreFiltro === "" ||
+            pregunta.categoriaPadreId === Number(categoriaPadreFiltro);
+
+        const coincideCategoria =
+            categoriaFiltro === "" ||
+            pregunta.categoriaId === Number(categoriaFiltro);
+
+        return (
+            coincideProceso &&
+            coincideCategoriaPadre &&
+            coincideCategoria
+        );
+    });
+
+    useEffect(() => {
+        setPaginaActual(1);
+    }, [
+        procesoFiltro,
+        categoriaPadreFiltro,
+        categoriaFiltro
+    ]);
+
+    useEffect(() => {
+        setPaginaInput(
+            paginaActual.toString()
+        );
+    }, [paginaActual]);
+
+    const totalPaginas = Math.max(
+        1,
+        Math.ceil(
+            preguntasFiltradas.length / FILAS_POR_PAGINA
+        )
+    );
+
+    const indiceInicial = (paginaActual - 1) * FILAS_POR_PAGINA;
+
+    const preguntasPagina =
+        preguntasFiltradas.slice(
+            indiceInicial,
+            indiceInicial + FILAS_POR_PAGINA
+        );
+
+
     if (loading) {
 
         return (
@@ -308,9 +388,171 @@ const PreguntasPage = () => {
 
             )}
 
+            <div className="mt-6">
+                <PageCard title="Filtros">
+                    <div className="grid grid-cols-3 gap-6">
+                        <div>
+                            <label
+                                className="
+                                    block
+                                    text-sm
+                                    font-medium
+                                    text-gray-700
+                                    mb-2
+                                "
+                            >
+                                Proceso
+                            </label>
+
+                            <select
+                                value={procesoFiltro}
+                                onChange={(e) =>
+                                    setProcesoFiltro(e.target.value)
+                                }
+                                className="
+                                    w-full
+                                    border
+                                    border-slate-300
+                                    rounded-lg
+                                    px-3
+                                    py-2
+                                "
+                            >
+
+                                <option value="">
+                                    Todos
+                                </option>
+                                {
+                                    procesos.map((proceso) => (
+                                        <option
+                                            key={proceso.id}
+                                            value={proceso.id}
+                                        >
+                                            {proceso.nombre}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+
+                        </div>
+
+                        <div>
+
+                            <label
+                                className="
+                                    block
+                                    text-sm
+                                    font-medium
+                                    text-gray-700
+                                    mb-2
+                                "
+                            >
+                                Categoría Padre
+                            </label>
+
+                            <select
+                                value={categoriaPadreFiltro}
+                                onChange={(e) => {
+
+                                    setCategoriaPadreFiltro(e.target.value);
+
+                                    setCategoriaFiltro("");
+
+                                }}
+                                className="
+                                    w-full
+                                    border
+                                    border-slate-300
+                                    rounded-lg
+                                    px-3
+                                    py-2
+                                "
+                            >
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                                {
+
+                                    categoriasPadre.map((categoria) => (
+
+                                        <option
+                                            key={categoria.id}
+                                            value={categoria.id}
+                                        >
+                                            {categoria.nombre}
+                                        </option>
+
+                                    ))
+
+                                }
+
+                            </select>
+
+                        </div>
+
+                        <div>
+
+                            <label
+                                className="
+                                    block
+                                    text-sm
+                                    font-medium
+                                    text-gray-700
+                                    mb-2
+                                "
+                            >
+                                Subcategoría
+                            </label>
+
+                            <select
+                                value={categoriaFiltro}
+                                onChange={(e) =>
+                                    setCategoriaFiltro(e.target.value)
+                                }
+                                className="
+                                    w-full
+                                    border
+                                    border-slate-300
+                                    rounded-lg
+                                    px-3
+                                    py-2
+                                "
+                            >
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                                {
+
+                                    categoriasVisibles.map((categoria) => (
+
+                                        <option
+                                            key={categoria.id}
+                                            value={categoria.id}
+                                        >
+                                            {categoria.nombre}
+                                        </option>
+
+                                    ))
+
+                                }
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </PageCard>
+
+            </div>
+
             <div className="mt-6 max-h-[600px] overflow-y-auto">
                 <DataTableContainer>
-                    {preguntas.length === 0 ? (
+                    {preguntasFiltradas.length === 0 ? (
 
                         <EmptyState
                             message="No existen preguntas registradas."
@@ -337,7 +579,7 @@ const PreguntasPage = () => {
                                     </th>
 
                                     <th className="px-6 py-4">
-                                    Categoría
+                                    SubCategoría
                                     </th>
 
                                     <th className="px-6 py-4">
@@ -358,7 +600,7 @@ const PreguntasPage = () => {
 
                             <tbody>
 
-                                {preguntas.map(
+                                {preguntasPagina.map(
                                     (pregunta) => (
 
                                         <tr
@@ -482,6 +724,101 @@ const PreguntasPage = () => {
                         </table>
                     )}
                 </DataTableContainer>
+            </div>
+
+            <div
+                className="
+                    flex
+                    justify-center
+                    items-center
+                    gap-4
+                    mt-6
+                "
+            >
+
+                <PrimaryButton
+                    onClick={() => {
+                        if (paginaActual > 1) {
+                            setPaginaActual(
+                                paginaActual - 1
+                            );
+                        }
+                    }}
+                    disabled={paginaActual <= 1}
+                >
+                    ← Anterior
+                </PrimaryButton>
+
+                <div
+                    className="
+                        flex
+                        items-center
+                        gap-2
+                        text-sm
+                        font-medium
+                    "
+                >
+
+                    Página
+
+                    <input
+                        type="number"
+                        min="1"
+                        max={totalPaginas}
+                        value={paginaInput}
+                        onChange={(e) =>
+                            setPaginaInput(e.target.value)
+                        }
+                        onKeyDown={(e) => {
+
+                            if (e.key !== "Enter") {
+                                return;
+                            }
+
+                            let pagina = Number(paginaInput);
+
+                            if (isNaN(pagina)) {
+                                pagina = 1;
+                            }
+
+                            if (pagina < 1) {
+                                pagina = 1;
+                            }
+
+                            if (pagina > totalPaginas) {
+                                pagina = totalPaginas;
+                            }
+
+                            setPaginaInput(pagina.toString());
+                            setPaginaActual(pagina);
+                        }}
+                        className="
+                            w-16
+                            text-center
+                            border
+                            border-slate-400
+                            rounded-lg
+                            py-1
+                        "
+                    />
+
+                    de {totalPaginas}
+
+                </div>
+
+                <PrimaryButton
+                    onClick={() => {
+                        if (paginaActual < totalPaginas) {
+                            setPaginaActual(
+                                paginaActual + 1
+                            );
+                        }
+                    }}
+                    disabled={paginaActual >= totalPaginas}
+                >
+                    Siguiente →
+                </PrimaryButton>
+
             </div>
 
             <Modal
