@@ -7,7 +7,9 @@ function TinyEditor({
 
     onChange,
 
-    height = 350
+    height = 350,
+
+    minimal = false
 
 }) {
 
@@ -59,7 +61,7 @@ function TinyEditor({
 
                 height,
 
-                menubar: true,
+                menubar: !minimal,
 
                 branding: false,
 
@@ -78,49 +80,44 @@ function TinyEditor({
 
                     },
 
-                plugins: [
+                plugins: minimal
+                    ? [
+                        "autolink",
+                        "charmap",
+                        "image",
+                        "link",
+                        "lists",
+                        "paste"
+                    ]
+                    : [
+                        "anchor",
+                        "autolink",
+                        "charmap",
+                        "code",
+                        "image",
+                        "link",
+                        "lists",
+                        "searchreplace",
+                        "table",
+                        "visualblocks",
+                        "wordcount",
+                        "paste"
+                    ],
 
-                    "anchor",
+                toolbar: minimal
+                    ? "bold italic underline | " +
+                      "alignleft aligncenter alignright | " +
+                      "bullist numlist | " +
+                      "link image | charmap"
+                    : "undo redo | " +
+                      "blocks fontsize | " +
+                      "bold italic underline | " +
+                      "alignleft aligncenter alignright alignjustify | " +
+                      "bullist numlist outdent indent | " +
+                      "link image table | " +
+                      "searchreplace visualblocks code",
 
-                    "autolink",
-
-                    "charmap",
-
-                    "code",
-
-                    "image",
-
-                    "link",
-
-                    "lists",
-
-                    "searchreplace",
-
-                    "table",
-
-                    "visualblocks",
-
-                    "wordcount",
-
-                    "paste"
-
-                ],
-
-                toolbar:
-
-                    "undo redo | " +
-
-                    "blocks fontsize | " +
-
-                    "bold italic underline | " +
-
-                    "alignleft aligncenter alignright alignjustify | " +
-
-                    "bullist numlist outdent indent | " +
-
-                    "link image table | " +
-
-                    "searchreplace visualblocks code",
+                toolbar_mode: minimal ? "wrap" : "floating",
 
                 content_style: `
                     body {
