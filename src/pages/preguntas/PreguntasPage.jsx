@@ -44,6 +44,7 @@ const PreguntasPage = () => {
     const [procesoFiltro, setProcesoFiltro] = useState("");
     const [categoriaPadreFiltro, setCategoriaPadreFiltro] = useState("");
     const [categoriaFiltro, setCategoriaFiltro] = useState("");
+    const [busquedaTexto, setBusquedaTexto] = useState("");
     const [paginaActual, setPaginaActual] = useState(1);
     const [paginaInput, setPaginaInput] = useState("1");
     const FILAS_POR_PAGINA = 6;
@@ -255,7 +256,7 @@ const PreguntasPage = () => {
 
     };
 
-    const obtenerVistaPrevia =
+    const obtenerContenidoPlano =
     (texto) => {
 
         if (!texto) {
@@ -263,12 +264,143 @@ const PreguntasPage = () => {
             return "";
         }
 
-        return texto.length > 80
-            ? texto.substring(
-                0,
-                80
-              ) + "..."
-            : texto;
+        return texto
+            .replace(/<[^>]+>/g, " ")
+            .replace(/&nbsp;/gi, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+    };
+
+    const escaparRegExp =
+    (texto) => {
+
+        return texto.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+        );
+    };
+
+    const obtenerVistaPrevia =
+    (
+        texto,
+        terminoBusqueda = ""
+    ) => {
+
+        const contenidoPlano =
+            obtenerContenidoPlano(texto);
+
+        if (!contenidoPlano) {
+
+            return "";
+        }
+
+        const limite = 80;
+        const terminoLimpio =
+            terminoBusqueda.trim();
+
+        if (!terminoLimpio) {
+
+            return contenidoPlano.length > limite
+                ? contenidoPlano.substring(
+                    0,
+                    limite
+                  ) + "..."
+                : contenidoPlano;
+        }
+
+        const indiceCoincidencia =
+            contenidoPlano.toLowerCase().indexOf(
+                terminoLimpio.toLowerCase()
+            );
+
+        if (indiceCoincidencia === -1) {
+
+            return contenidoPlano.length > limite
+                ? contenidoPlano.substring(
+                    0,
+                    limite
+                  ) + "..."
+                : contenidoPlano;
+        }
+
+        const inicio = Math.max(
+            0,
+            indiceCoincidencia - 25
+        );
+
+        const fin = Math.min(
+            contenidoPlano.length,
+            inicio + limite
+        );
+
+        let fragmento = contenidoPlano.substring(
+            inicio,
+            fin
+        );
+
+        if (inicio > 0) {
+            fragmento = "..." + fragmento;
+        }
+
+        if (fin < contenidoPlano.length) {
+            fragmento += "...";
+        }
+
+        return fragmento;
+    };
+
+    const renderVistaPreviaResaltada =
+    (texto) => {
+
+        const vistaPrevia = obtenerVistaPrevia(
+            texto,
+            busquedaTexto
+        );
+
+        if (!vistaPrevia) {
+
+            return "Sin contenido";
+        }
+
+        const termino =
+            busquedaTexto.trim();
+
+        if (!termino) {
+
+            return vistaPrevia;
+        }
+
+        const regex = new RegExp(
+            `(${escaparRegExp(termino)})`,
+            "ig"
+        );
+
+        return vistaPrevia
+            .split(regex)
+            .map((parte, index) => {
+
+                const esCoincidencia =
+                    parte.toLowerCase() ===
+                    termino.toLowerCase();
+
+                if (!esCoincidencia) {
+
+                    return (
+                        <span key={index}>
+                            {parte}
+                        </span>
+                    );
+                }
+
+                return (
+                    <mark
+                        key={index}
+                        className="bg-yellow-200 text-amber-900 px-0.5 rounded-sm"
+                    >
+                        {parte}
+                    </mark>
+                );
+            });
     };
 
     // Filtrado y Paginación de Preguntas
@@ -292,10 +424,21 @@ const PreguntasPage = () => {
             categoriaFiltro === "" ||
             pregunta.categoriaId === Number(categoriaFiltro);
 
+        const contenidoLimpio = obtenerContenidoPlano(
+            pregunta.contenidoHtml || ""
+        ).toLowerCase();
+
+        const coincideBusqueda =
+            busquedaTexto.trim() === "" ||
+            contenidoLimpio.includes(
+                busquedaTexto.toLowerCase().trim()
+            );
+
         return (
             coincideProceso &&
             coincideCategoriaPadre &&
-            coincideCategoria
+            coincideCategoria &&
+            coincideBusqueda
         );
     });
 
@@ -304,7 +447,8 @@ const PreguntasPage = () => {
     }, [
         procesoFiltro,
         categoriaPadreFiltro,
-        categoriaFiltro
+        categoriaFiltro,
+        busquedaTexto
     ]);
 
     useEffect(() => {
@@ -390,7 +534,38 @@ const PreguntasPage = () => {
 
             <div className="mt-6">
                 <PageCard title="Filtros">
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div>
+                            <label
+                                className="
+                                    block
+                                    text-sm
+                                    font-medium
+                                    text-gray-700
+                                    mb-2
+                                "
+                            >
+                                Buscar pregunta
+                            </label>
+
+                            <input
+                                type="text"
+                                value={busquedaTexto}
+                                onChange={(e) =>
+                                    setBusquedaTexto(e.target.value)
+                                }
+                                placeholder="Escriba una palabra clave..."
+                                className="
+                                    w-full
+                                    border
+                                    border-slate-300
+                                    rounded-lg
+                                    px-3
+                                    py-2
+                                "
+                            />
+                        </div>
+
                         <div>
                             <label
                                 className="
@@ -645,6 +820,28 @@ const PreguntasPage = () => {
 
                                                 <div
                                                     className="
+                                                        max-w-[360px]
+                                                        text-left
+                                                        text-sm
+                                                        text-gray-700
+                                                        leading-relaxed
+                                                        line-clamp-2
+                                                    "
+                                                >
+
+                                                    {
+                                                        renderVistaPreviaResaltada(
+                                                            pregunta.contenidoHtml
+                                                        )
+                                                    }
+
+                                                </div>
+                                            </td>
+
+                                            <td className="px-6 py-4">
+
+                                                <div
+                                                    className="
                                                     flex
                                                     gap-2
                                                     justify-center
@@ -661,18 +858,6 @@ const PreguntasPage = () => {
                                                             )
                                                         }
                                                     />
-                                                </div>
-                                            </td>
-
-                                            <td className="px-6 py-4">
-
-                                                <div
-                                                    className="
-                                                    flex
-                                                    gap-2
-                                                    justify-center
-                                                    "
-                                                >
 
                                                     <ActionButton
                                                         label="Editar"
