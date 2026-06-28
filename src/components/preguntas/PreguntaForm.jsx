@@ -204,7 +204,7 @@ function PreguntaForm({
 
                     <div>
                         <label className="block mb-1.5 text-sm font-medium text-gray-700">
-                            Categoría
+                            Subcategoría
                         </label>
                         <select
                             value={categoriaId}

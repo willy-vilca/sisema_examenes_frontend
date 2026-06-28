@@ -444,7 +444,7 @@ function CategoriasPage() {
 
             )}
 
-            <div className="mt-6">
+            <div className="mt-6 max-h-[470px] overflow-y-auto">
 
                 <DataTableContainer>
                     {vistaActiva === "padre" ? (

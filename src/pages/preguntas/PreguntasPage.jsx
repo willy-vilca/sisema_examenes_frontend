@@ -801,9 +801,16 @@ const PreguntasPage = () => {
             <div
                 className="
                     flex
-                    justify-between
-                    items-center
-                    mb-4
+                    flex-col
+                    md:flex-row
+                    md:justify-between
+                    md:items-center
+                    gap-4
+                    p-4
+                    rounded-xl
+                    border
+                    border-slate-200
+                    bg-slate-50
                 "
             >
 
@@ -811,14 +818,34 @@ const PreguntasPage = () => {
                     className="
                         text-sm
                         text-slate-600
+                        flex
+                        items-center
+                        gap-2
                     "
                 >
 
+                    <span
+                        className="
+                            inline-flex
+                            h-7
+                            w-7
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-blue-100
+                            text-blue-700
+                            font-semibold
+                            text-xs
+                        "
+                    >
+                        #
+                    </span>
+
                     Se muestran
-                    <span className="font-semibold">
+                    <span className="font-semibold text-slate-800">
                         {" "}{preguntasFiltradas.length}{" "}
                     </span>
-                    preguntas.
+                    preguntas en la vista actual.
 
                 </div>
 
@@ -836,15 +863,16 @@ const PreguntasPage = () => {
                             flex
                             items-center
                             gap-2
+                            whitespace-nowrap
                         "
                     >
-                        <FaCopy />
+                        <FaCopy className="text-sm" />
                         Agregar preguntas a otro proceso
                     </div>
                 </PrimaryButton>
             </div>
 
-            <div className="mt-6 max-h-[600px] overflow-y-auto">
+            <div className="mt-3 max-h-[600px] overflow-y-auto">
                 <DataTableContainer>
                     {preguntasFiltradas.length === 0 ? (
 
@@ -1141,28 +1169,51 @@ const PreguntasPage = () => {
                             bg-blue-50
                             border
                             border-blue-200
-                            rounded-lg
-                            p-4
+                            rounded-xl
+                            p-5
                             text-sm
                             text-slate-700
+                            leading-relaxed
                         "
                     >
-                        Actualmente existen
-                        <span className="font-semibold">
-                            {" "}{preguntasFiltradas.length}{" "}
-                        </span>
-                        preguntas visibles en la tabla.
-                        <br /><br />
+                        <div className="flex items-start gap-3">
+                            <span
+                                className="
+                                    mt-0.5
+                                    inline-flex
+                                    h-6
+                                    w-6
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-blue-200
+                                    text-blue-700
+                                    text-xs
+                                    font-bold
+                                    flex-shrink-0
+                                "
+                            >
+                                i
+                            </span>
 
-                        Todas las preguntas que actualmente
-                        se muestran en la tabla serán
-                        replicadas y agregadas al proceso
-                        seleccionado.
+                            <div>
+                                <p>
+                                    Actualmente existen
+                                    <span className="font-semibold text-slate-800">
+                                        {" "}{preguntasFiltradas.length}{" "}
+                                    </span>
+                                    preguntas visibles en la tabla.
+                                </p>
 
-                        <br /><br />
+                                <p className="mt-2">
+                                    Todas las preguntas visibles se replicarán al proceso seleccionado.
+                                </p>
 
-                        Si alguna pregunta ya pertenece al proceso
-                        seleccionado, será omitida automáticamente.
+                                <p className="mt-2">
+                                    Si una pregunta ya pertenece al proceso destino, se omitirá automáticamente.
+                                </p>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -1193,6 +1244,10 @@ const PreguntasPage = () => {
                                 rounded-lg
                                 px-3
                                 py-2
+                                focus:outline-none
+                                focus:ring-2
+                                focus:ring-blue-500
+                                focus:border-transparent
                             "
                         >
 
@@ -1241,7 +1296,9 @@ const PreguntasPage = () => {
                                 rounded-lg
                                 border
                                 border-slate-300
+                                text-slate-700
                                 hover:bg-slate-100
+                                transition
                             "
                         >
                             Cancelar

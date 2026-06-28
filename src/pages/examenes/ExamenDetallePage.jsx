@@ -171,113 +171,6 @@ function ExamenDetallePage() {
 
             </div>
 
-            {/* CATEGORÍAS */}
-
-            <div
-                className="
-                    bg-white
-                    rounded-xl
-                    shadow-lg
-                    border
-                    border-slate-300
-                "
-            >
-
-                <div
-                    className="
-                        p-5
-                        border-b
-                        border-slate-300
-                        flex
-                        items-center
-                        gap-2
-                    "
-                >
-
-                    <BookOpen size={18} />
-
-                    <h2
-                        className="
-                            font-semibold
-                            text-slate-800
-                        "
-                    >
-                        Categorías Incluidas
-                    </h2>
-
-                </div>
-
-                <div className="p-5 max-h-[420px] overflow-y-auto">
-
-                    <table className="w-full">
-
-                        <thead>
-
-                            <tr>
-
-                                <th className="text-left pb-3">
-                                    Categoría
-                                </th>
-
-                                <th className="text-right pb-3">
-                                    Preguntas
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            {
-                                detalle.categorias.map(
-                                    (categoria) => (
-
-                                        <tr
-                                            key={
-                                                categoria.categoriaId
-                                            }
-                                            className="
-                                                border-t
-                                                border-slate-300
-                                            "
-                                        >
-
-                                            <td className="py-3">
-
-                                                {
-                                                    categoria.categoriaNombre
-                                                }
-
-                                            </td>
-
-                                            <td
-                                                className="
-                                                    py-3
-                                                    text-right
-                                                "
-                                            >
-
-                                                {
-                                                    categoria.cantidadPreguntas
-                                                }
-
-                                            </td>
-
-                                        </tr>
-
-                                    )
-                                )
-                            }
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
             {/* TEMAS */}
 
             <div
@@ -392,6 +285,113 @@ function ExamenDetallePage() {
                         }
 
                     </div>
+
+                </div>
+
+            </div>
+
+            {/* CATEGORÍAS */}
+
+            <div
+                className="
+                    bg-white
+                    rounded-xl
+                    shadow-lg
+                    border
+                    border-slate-300
+                "
+            >
+
+                <div
+                    className="
+                        p-5
+                        border-b
+                        border-slate-300
+                        flex
+                        items-center
+                        gap-2
+                    "
+                >
+
+                    <BookOpen size={18} />
+
+                    <h2
+                        className="
+                            font-semibold
+                            text-slate-800
+                        "
+                    >
+                        Categorías Incluidas
+                    </h2>
+
+                </div>
+
+                <div className="p-5 max-h-[420px] overflow-y-auto">
+
+                    <table className="w-full">
+
+                        <thead>
+
+                            <tr>
+
+                                <th className="text-left pb-3">
+                                    Categoría
+                                </th>
+
+                                <th className="text-right pb-3">
+                                    Preguntas
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {
+                                detalle.categorias.map(
+                                    (categoria) => (
+
+                                        <tr
+                                            key={
+                                                categoria.categoriaId
+                                            }
+                                            className="
+                                                border-t
+                                                border-slate-300
+                                            "
+                                        >
+
+                                            <td className="py-3">
+
+                                                {
+                                                    categoria.categoriaNombre
+                                                }
+
+                                            </td>
+
+                                            <td
+                                                className="
+                                                    py-3
+                                                    text-right
+                                                "
+                                            >
+
+                                                {
+                                                    categoria.cantidadPreguntas
+                                                }
+
+                                            </td>
+
+                                        </tr>
+
+                                    )
+                                )
+                            }
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
