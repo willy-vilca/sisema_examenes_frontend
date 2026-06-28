@@ -187,7 +187,7 @@ function ModalConfiguracionExamen({
 
                 </div>
 
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto max-h-[420px] overflow-y-auto">
 
                     <table
                         className="

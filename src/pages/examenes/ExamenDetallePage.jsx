@@ -207,7 +207,7 @@ function ExamenDetallePage() {
 
                 </div>
 
-                <div className="p-5">
+                <div className="p-5 max-h-[420px] overflow-y-auto">
 
                     <table className="w-full">
 
