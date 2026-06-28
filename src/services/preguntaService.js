@@ -20,7 +20,13 @@ const preguntaService = {
     cambiarEstado: (id) =>
         axiosClient.patch(
             `/preguntas/${id}/estado`
-        )
+        ),
+
+    replicarPreguntas: (data) =>
+        axiosClient.post(
+            "/preguntas/replicar",
+            data
+        ),
 };
 
 export default preguntaService;

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
     FaEdit,
     FaTrash,
+    FaCopy,
     FaPowerOff
 } from "react-icons/fa";
 
@@ -47,6 +48,11 @@ const PreguntasPage = () => {
     const [busquedaTexto, setBusquedaTexto] = useState("");
     const [paginaActual, setPaginaActual] = useState(1);
     const [paginaInput, setPaginaInput] = useState("1");
+
+    const [mostrarModalReplicar,setMostrarModalReplicar] = useState(false);
+    const [procesoDestino,setProcesoDestino] = useState("");
+    const [replicando,setReplicando] = useState(false);
+
     const FILAS_POR_PAGINA = 6;
 
     const [loading, setLoading] =
@@ -255,6 +261,73 @@ const PreguntasPage = () => {
         }
 
     };
+
+    const replicarPreguntas =
+        async () => {
+
+            if (!procesoDestino) {
+
+                alertService.error(
+                    "Proceso requerido",
+                    "Seleccione un proceso destino."
+                );
+
+                return;
+
+            }
+
+            try {
+
+                setReplicando(true);
+
+                const payload = {
+
+                    procesoDestinoId:
+                        Number(procesoDestino),
+
+                    preguntasIds:
+                        preguntasFiltradas.map(
+                            p => p.id
+                        )
+
+                };
+
+                const response =
+                    await preguntaService
+                        .replicarPreguntas(
+                            payload
+                        );
+
+                alertService.success(
+                    "Proceso completado",
+                    `Se copiaron correctamente  ${response.data.preguntasCopiadas} preguntas.\n\n` +
+                    `Se omitieron ${response.data.preguntasOmitidas} preguntas porque ya pertenecían al proceso seleccionado.`
+                );
+
+                setMostrarModalReplicar(
+                    false
+                );
+
+                setProcesoDestino("");
+
+                cargarPreguntas();
+
+            }
+            catch (error) {
+
+                alertService.error(
+                    "Error",
+                    "No fue posible replicar las preguntas."
+                );
+
+            }
+            finally {
+
+                setReplicando(false);
+
+            }
+
+        };
 
     const obtenerContenidoPlano =
     (texto) => {
@@ -725,6 +798,52 @@ const PreguntasPage = () => {
 
             </div>
 
+            <div
+                className="
+                    flex
+                    justify-between
+                    items-center
+                    mb-4
+                "
+            >
+
+                <div
+                    className="
+                        text-sm
+                        text-slate-600
+                    "
+                >
+
+                    Se muestran
+                    <span className="font-semibold">
+                        {" "}{preguntasFiltradas.length}{" "}
+                    </span>
+                    preguntas.
+
+                </div>
+
+                <PrimaryButton
+                    onClick={() =>
+                        setMostrarModalReplicar(true)
+                    }
+                    disabled={
+                        preguntasFiltradas.length === 0
+                    }
+
+                >
+                    <div
+                        className="
+                            flex
+                            items-center
+                            gap-2
+                        "
+                    >
+                        <FaCopy />
+                        Agregar preguntas a otro proceso
+                    </div>
+                </PrimaryButton>
+            </div>
+
             <div className="mt-6 max-h-[600px] overflow-y-auto">
                 <DataTableContainer>
                     {preguntasFiltradas.length === 0 ? (
@@ -1005,6 +1124,147 @@ const PreguntasPage = () => {
                 </PrimaryButton>
 
             </div>
+
+            <Modal
+                isOpen={mostrarModalReplicar}
+                title="Agregar preguntas a otro proceso"
+                onClose={() => {
+                    setMostrarModalReplicar(false);
+                    setProcesoDestino("");
+                }}
+            >
+
+                <div className="space-y-5">
+
+                    <div
+                        className="
+                            bg-blue-50
+                            border
+                            border-blue-200
+                            rounded-lg
+                            p-4
+                            text-sm
+                            text-slate-700
+                        "
+                    >
+                        Actualmente existen
+                        <span className="font-semibold">
+                            {" "}{preguntasFiltradas.length}{" "}
+                        </span>
+                        preguntas visibles en la tabla.
+                        <br /><br />
+
+                        Todas las preguntas que actualmente
+                        se muestran en la tabla serán
+                        replicadas y agregadas al proceso
+                        seleccionado.
+
+                        <br /><br />
+
+                        Si alguna pregunta ya pertenece al proceso
+                        seleccionado, será omitida automáticamente.
+
+                    </div>
+
+                    <div>
+
+                        <label
+                            className="
+                                block
+                                text-sm
+                                font-medium
+                                mb-2
+                            "
+                        >
+                            Proceso destino
+                        </label>
+
+                        <select
+                            value={procesoDestino}
+                            onChange={(e) =>
+                                setProcesoDestino(
+                                    e.target.value
+                                )
+                            }
+                            className="
+                                w-full
+                                border
+                                border-slate-300
+                                rounded-lg
+                                px-3
+                                py-2
+                            "
+                        >
+
+                            <option value="">
+                                Seleccione un proceso
+                            </option>
+
+                            {
+                                procesos.map(
+                                    proceso => (
+                                        <option
+                                            key={proceso.id}
+                                            value={proceso.id}
+                                        >
+                                            {proceso.nombre}
+                                        </option>
+                                    )
+                                )
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div
+                        className="
+                            flex
+                            justify-end
+                            gap-3
+                            pt-2
+                        "
+                    >
+
+                        <button
+                            onClick={() => {
+                                setMostrarModalReplicar(
+                                    false
+                                );
+                                setProcesoDestino("");
+
+                            }}
+
+                            className="
+                                px-5
+                                py-2
+                                rounded-lg
+                                border
+                                border-slate-300
+                                hover:bg-slate-100
+                            "
+                        >
+                            Cancelar
+                        </button>
+
+                        <PrimaryButton
+                            onClick={
+                                replicarPreguntas
+                            }
+                            disabled={
+                                !procesoDestino ||
+                                replicando
+                            }
+                        >
+                            {
+                                replicando
+                                ? "Replicando..."
+                                : "Replicar preguntas"
+                            }
+                        </PrimaryButton>
+                    </div>
+                </div>
+            </Modal>
 
             <Modal
 
